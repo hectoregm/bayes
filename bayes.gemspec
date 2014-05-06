@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Bayes::VERSION
   spec.authors       = ["Hector E. Gomez Morales"]
   spec.email         = ["hectoregm@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Library that implements inference over Bayes Networks.}
+  spec.description   = %q{Library that implements inference over Bayes Networks.}
+  spec.homepage      = "https://github.com/hectoregm/bayes"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
