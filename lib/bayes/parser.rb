@@ -1,7 +1,6 @@
 module Bayes
-  class Network
+  class Parser
     def initialize(path)
-      parser = Parser.new(path)
     end
   end
 end
