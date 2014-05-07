@@ -1,5 +1,8 @@
 require "bayes/version"
+require "bayes/network"
 
 module Bayes
-  # Your code goes here...
+  def self.create
+    Network.new
+  end
 end
