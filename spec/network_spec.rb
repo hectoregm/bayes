@@ -1,4 +1,4 @@
-require 'bayes'
+require 'spec_helper'
 
 describe Bayes::Network do
   it 'create a new bayes network' do

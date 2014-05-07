@@ -1,4 +1,4 @@
-require 'bayes'
+require 'spec_helper'
 
 describe Bayes do
   it 'create' do
