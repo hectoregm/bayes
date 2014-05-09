@@ -6,7 +6,12 @@ module Bayes
 
     def get_random_variables
       result = /Variables:\s*\[(.+?)\]/m.match(@content)[1]
-      result.scan(/(.?+):/).flatten
+      result.scan(/{(.+?):/).flatten
+    end
+
+    def get_factors
+      result = /Probabilidades:\s*\[(.+?)\]/m.match(@content)[1]
+      result = result.scan(/\{(.+?)\}/)
     end
   end
 end

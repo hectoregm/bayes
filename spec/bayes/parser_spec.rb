@@ -14,9 +14,16 @@ describe Bayes::Parser do
   end
 
   describe "#get_random_variables" do
-    it 'return an array of the random variables' do
+    it 'returns an array of the random variables' do
       @parser = Bayes::Parser.new(@netone_path)
       expect(@parser.get_random_variables).to eql(@netone_variables)
+    end
+  end
+
+  describe "#get_factors" do
+    it 'returns an array of factors' do
+      @parser = Bayes::Parser.new(@netone_path)
+      expect(@parser.get_factors).to be_a(Array)
     end
   end
 
