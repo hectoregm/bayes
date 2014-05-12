@@ -1,8 +1,8 @@
 module Bayes
   class Variable
-    attr_accessor :name, :range
+    attr_accessor :name
 
-    def initialize(name, range)
+    def initialize(name, values)
       @name = name
       @values = values
     end
@@ -16,6 +16,16 @@ module Bayes
       end
 
       result
+    end
+
+    def values(with_prefix=false)
+      if with_prefix
+        @values.collect do |val|
+          name + val
+        end
+      else
+        @values
+      end
     end
   end
 end
