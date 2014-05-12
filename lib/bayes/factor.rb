@@ -1,10 +1,9 @@
 module Bayes
   class Factor
-    attr_reader :variables, :signature, :hash
-    def initialize(data)
-      @signature = /P\((.*?)\)/.match(data)[0].gsub(/=[0-9]+/,'')
-      @variables = signature.scan(/([A-Z]+?)[|,]*/).flatten
-      @variables.shift
+    attr_accessor :variables, :signature, :table
+    def initialize(signature, variables, data)
+      @signature = signature
+      @variables = variables
       @table = {}
 
       data.scan(/P\((.+?)\)=([0-9\.]+)/) do |state, value|
@@ -15,6 +14,12 @@ module Bayes
 
     def [](index)
       @table[index]
+    end
+
+    def multiply(other)
+      variables = self.variables + other.variables
+      variables.uniq!
+      result = Factor.new(self.signature, variables, "")
     end
   end
 end

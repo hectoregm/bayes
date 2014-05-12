@@ -3,22 +3,22 @@ require 'spec_helper'
 describe Bayes::Factor do
 
   before :all do
-    @values = "P(A=0)=0.1, P(A=1)=0.9"
+    @factor = Bayes::Factor.new("P(A)", ["A"], "P(A=0)=0.1, P(A=1)=0.9")
   end
 
   describe "#new" do
 
     it 'creates a new factor' do
-      expect(Bayes::Factor.new(@values)).to be_an_instance_of(Bayes::Factor)
+      expect(@factor).to be_an_instance_of(Bayes::Factor)
     end
   end
 
   it 'has a signature' do
-    expect(Bayes::Factor.new(@values).signature).to eq("P(A)")
+    expect(@factor.signature).to eq("P(A)")
   end
 
   it 'has random variables' do
-    expect(Bayes::Factor.new(@values).variables).to eq(["A"])
+    expect(@factor.variables).to eq(["A"])
   end
 
 end
