@@ -11,7 +11,12 @@ module Bayes
 
     def get_factors
       result = /Probabilidades:\s*\[(.+?)\]/m.match(@content)[1]
-      result = result.scan(/\{(.+?)\}/)
+      factors = []
+      result.scan(/\{(.+?)\}/m) do |factor|
+        factors << Bayes::Factor.new(factor.first)
+      end
+
+      factors
     end
   end
 end

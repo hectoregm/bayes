@@ -1,5 +1,6 @@
 require "bayes/version"
 require "bayes/parser"
+require "bayes/factor"
 require "bayes/network"
 
 module Bayes

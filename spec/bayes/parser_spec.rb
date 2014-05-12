@@ -24,6 +24,11 @@ describe Bayes::Parser do
     it 'returns an array of factors' do
       @parser = Bayes::Parser.new(@netone_path)
       expect(@parser.get_factors).to be_a(Array)
+      actual = @parser.get_factors.all? do |factor|
+        factor.is_a? Bayes::Factor
+      end
+
+      expect(actual).to be true
     end
   end
 
