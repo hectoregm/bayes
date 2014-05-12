@@ -5,8 +5,15 @@ module Bayes
     end
 
     def get_random_variables
+      return @variables if @variables
+
       result = /Variables:\s*\[(.+?)\]/m.match(@content)[1]
-      result.scan(/{(.+?):/).flatten
+      @variables = []
+      result.scan(/{(.+?):([0-9,]+?)}/) do |name,values|
+        @variables << Bayes::Variable.new(name,values.split(','))
+      end
+
+      @variables
     end
 
     def get_factors
@@ -18,10 +25,16 @@ module Bayes
         variables = signature.scan(/([A-Z]+?)[|,]*/).flatten
         variables.shift
 
-        factors << Bayes::Factor.new(signature, variables, factor)
+        factors << Bayes::Factor.new(signature, select_variables(variables), factor)
       end
 
       factors
+    end
+
+    def select_variables(names)
+      get_random_variables.select do |var|
+        names.include? var.name
+      end
     end
   end
 end
