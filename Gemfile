@@ -8,3 +8,5 @@ gem 'guard-rspec'
 gem 'guard-bundler'
 gem 'coveralls', require: false
 gem 'pry'
+gem 'pry-stack_explorer'
+gem 'pry-debugger'
