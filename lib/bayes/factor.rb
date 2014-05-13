@@ -7,13 +7,22 @@ module Bayes
       @table = {}
 
       data.scan(/P\((.+?)\)=([0-9\.]+)/) do |state, value|
-        state = state.scan(/[A-Z]+?=([0-9]+)/).flatten
+        #puts "State: #{state}"
+        #puts "Value: #{value}"
+        array = state.scan(/([A-Z]+?)=([0-9]+)/).sort.flatten
+        state = Hash[*array]
         @table[state] = value
       end
     end
 
     def [](index)
       @table[index]
+    end
+
+    def marginalization(variable)
+      var = @variables.last
+      puts @variables.detect { |var| var.name == variable }.inspect
+      puts @variables.select { |var| var.name != variable }.inspect
     end
 
     def multiply(other)

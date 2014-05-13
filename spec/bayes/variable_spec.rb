@@ -29,7 +29,7 @@ describe Bayes::Variable do
 
     context 'with variable name prefix' do
       it 'has a range of valid values' do
-        expect(@variable.values(true)).to eq(["A0","A1","A2"])
+        expect(@variable.values(true)).to eq([["A", "0"], ["A", "1"], ["A", "2"]])
       end
     end
   end

@@ -7,11 +7,25 @@ module Bayes
       @values = values
     end
 
+    def self.generate_space(variables, initial_value = 0)
+      variables = variables.dup
+      initial_variable = variables.first
+      initial_space = initial_variable.values(true)
+      space = variables.inject(initial_space) { |space, variable| variable.space(space) }
+
+      result = {}
+      space.each do |row|
+        result[Hash[*row]] = initial_value
+      end
+
+      result
+    end
+
     def space(array)
       result = []
-      values.each do |value|
-        array.each do |elem|
-          result << (elem + [value])
+      array.each do |elem|
+        values(true).each do |val|
+          result << (elem + val)
         end
       end
 
@@ -21,7 +35,7 @@ module Bayes
     def values(with_prefix=false)
       if with_prefix
         @values.collect do |val|
-          name + val
+          [name,val]
         end
       else
         @values
