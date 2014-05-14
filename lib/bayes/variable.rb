@@ -1,5 +1,6 @@
 module Bayes
   class Variable
+    include Comparable
     attr_accessor :name
 
     def initialize(name, values)
@@ -40,6 +41,14 @@ module Bayes
       else
         @values
       end
+    end
+
+    def ==(other)
+      self.name == other.name && self.values == other.values
+    end
+
+    def <=>(other)
+      self.name <=> other.name
     end
   end
 end

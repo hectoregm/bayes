@@ -43,15 +43,25 @@ module Bayes
         new_factor[key] += @table[key]
       end
 
-      new_factor.table = new_space
-
       new_factor
     end
 
     def multiply(other)
-      variables = self.variables + other.variables
-      variables.uniq!
-      result = Factor.new(self.signature, variables, "")
+      new_variables = self.variables + other.variables
+      new_variables.sort!.uniq!
+      new_factor = Factor.new(self.signature, new_variables, "")
+      new_space = Bayes::Variable.generate_space(new_variables, 1)
+      new_factor.table = new_space
+
+      new_factor.table.keys.each do |key|
+        new_factor.table[key] = self[key] * other[key]
+      end
+
+      new_factor
+    end
+
+    def ==(other)
+      self.variables == other.variables && self.table == other.table
     end
   end
 end
